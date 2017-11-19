@@ -1,0 +1,21 @@
+html {
+    background: #59A5D8;
+}
+
+header {
+    margin: 2%;
+    color: #104385;
+}
+
+div {
+    margin: 2%;
+    border: solid #104385;
+    padding: 1%;
+    color: black;
+    background: #84D2F6;
+    border-radius: 2ex;
+}
+
+th.about_col {
+    font-weight: normal;
+}
