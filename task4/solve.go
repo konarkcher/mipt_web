@@ -27,6 +27,7 @@ func PowerGenerator(number int) (func() int) {
 
 func DifferentWordsCount(s string) int {
 	words := make(map[string]bool)
+	s += "_"
 
 	wordStart := 0
 	for i := 1; i < len(s); i++ {
