@@ -15,12 +15,8 @@ type PostResponse struct {
 	Key string `json:"key"`
 }
 
-type LongUrl struct {
-	Location string `json:"Location"`
-}
-
 var (
-	urls   = make(map[int]LongUrl)
+	urls   = make(map[int]string)
 	nextId = 0
 )
 
@@ -31,7 +27,7 @@ func shortenUrl(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	urls[nextId] = LongUrl{Location: newUrl.Url}
+	urls[nextId] = newUrl.Url
 
 	response, err := json.Marshal(PostResponse{Key: strconv.Itoa(nextId)})
 	if err != nil {
@@ -50,13 +46,7 @@ func getURl(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if longUrl, ok := urls[key]; ok {
-		response, err := json.Marshal(longUrl)
-		if err != nil {
-			panic(err)
-		}
-
-		w.WriteHeader(http.StatusMovedPermanently)
-		w.Write(response)
+		http.Redirect(w, r, longUrl, http.StatusMovedPermanently)
 		return
 	}
 
