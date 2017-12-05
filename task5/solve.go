@@ -12,7 +12,7 @@ type UrlAdd struct {
 }
 
 type PostResponse struct {
-	Key int `json:"key"`
+	Key string `json:"key"`
 }
 
 type LongUrl struct {
@@ -33,7 +33,7 @@ func shortenUrl(w http.ResponseWriter, r *http.Request) {
 
 	urls[nextId] = LongUrl{Location: newUrl.Url}
 
-	response, err := json.Marshal(PostResponse{Key: nextId})
+	response, err := json.Marshal(PostResponse{Key: strconv.Itoa(nextId)})
 	if err != nil {
 		panic(err)
 	}
