@@ -47,10 +47,7 @@ func getURl(w http.ResponseWriter, r *http.Request) {
 
 	if longUrl, ok := urls[key]; ok {
 		http.Redirect(w, r, longUrl, http.StatusMovedPermanently)
-		return
 	}
-
-	w.WriteHeader(http.StatusNotFound)
 }
 
 func main() {
